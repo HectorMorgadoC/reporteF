@@ -1,0 +1,35 @@
+input,select {
+    padding: .5em 4em;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
+.subMain{
+    display:inline-flex;
+    justify-content: stretch;
+    
+    
+}
+
+
+
+.containerForm{
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.containerAForm{
+    display: flex;
+    margin-left: 30em;
+}
+
+.container{
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    border: .5px solid black;
+}
