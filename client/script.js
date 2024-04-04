@@ -4,7 +4,7 @@ const selectDescription = document.getElementById('description');
 const selectWorkRoutine = document.getElementById('workroutine');
 const selectAssigned = document.getElementById('assigned');
 const formData = document.getElementById('formdata');
-const l = document.getElementById('datetimeWarning')
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -52,9 +52,11 @@ formData.addEventListener('submit',e => {
     e.preventDefault()
     const path = e.target.action
 
-    const url = new URLSearchParams(path)
 
-    const keys = [
+    const url = new URL(path)
+    const urlParamas = url.searchParams;
+ 
+    const keysArray = [
         'datetimeWarning',
         'datetimeExecute',
         'reports',
@@ -66,17 +68,11 @@ formData.addEventListener('submit',e => {
         'comment'
     ]
 
-    object = {};
-/*
-    for(let i = 0;i < keys.length;i++){
-        let atribute = keys[0]
-        const iterador = document.getElementById(keys[i])
-        Object.assign(object,{ keys: iterador.value})
+    function CreateReport(){
 
-    }
-*/
-       
-    const objectReport = {
+        let count = 0;
+
+        const objectReport = {
         fecha_aviso : undefined,
         fecha_ejecucion : undefined,
         reportero : undefined,
@@ -86,14 +82,18 @@ formData.addEventListener('submit',e => {
         reporte_falla: undefined,
         trabajo_realizado: undefined,
         comentario: undefined
+        }
+
+        Object.entries(objectReport).map( ([keys ,value]) => {
+    
+            objectReport[keys] = urlParamas.get(keysArray[count])
+            count++
+        
+        })
+
+        return objectReport
     }
 
-for( let key in objectReport){
-    console.log(key)
-    Object.assign(object,{ key : 'saludo'})
-}
+    console.log(JSON.stringify(CreateReport()));
 
-    console.log(object)
-   
-
-})
+});
