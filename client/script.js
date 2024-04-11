@@ -1,9 +1,15 @@
 
+const formData = document.getElementById('formdata');
+const selectDateWarning = document.getElementById('datetimeWarning');
+const selectDateExecute = document.getElementById('datetimeExecute');
 const selectReports = document.getElementById('reports');
 const selectDescription = document.getElementById('description');
 const selectWorkRoutine = document.getElementById('workroutine');
 const selectAssigned = document.getElementById('assigned');
-const formData = document.getElementById('formdata');
+const selectTitleText = document.getElementById('titleText');
+const selectReport = document.getElementById('report');
+const selectComment = document.getElementById('comment');
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -50,50 +56,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 formData.addEventListener('submit',e => {
     e.preventDefault()
-    const path = e.target.action
 
-
-    const url = new URL(path)
-    const urlParamas = url.searchParams;
- 
-    const keysArray = [
-        'datetimeWarning',
-        'datetimeExecute',
-        'reports',
-        'description',
-        'workroutine',
-        'assigned',
-        'titleText',
-        'report',
-        'comment'
-    ]
-
-    function CreateReport(){
-
-        let count = 0;
-
-        const objectReport = {
-        fecha_aviso : undefined,
-        fecha_ejecucion : undefined,
-        reportero : undefined,
-        descripcion: undefined,
-        rutina_trabajo : undefined,
-        asignado: undefined,
-        reporte_falla: undefined,
-        trabajo_realizado: undefined,
-        comentario: undefined
-        }
-
-        Object.entries(objectReport).map( ([keys ,value]) => {
-    
-            objectReport[keys] = urlParamas.get(keysArray[count])
-            count++
-        
-        })
-
-        return objectReport
+    const dataReport = {
+        descripcionMaquina : selectDescription.value,
+        rutinaTrabajo : selectWorkRoutine.value,
+        reportero : selectReports.value,
+        asignado : selectAssigned.value,
+        fechaAviso : formatFecha(selectDateWarning.value),
+        fechaEjecucion : formatFecha(selectDateExecute.value),
+        reporteFalla: selectTitleText.value,
+        trabajoEfectuar: selectReport.value,
+        comentarios: selectComment.value,
     }
 
-    console.log(JSON.stringify(CreateReport()));
+    fetch('http://localhost:5000/', {
+        method : 'post',
+        header: {
+            'Content-Type':'Application/json'
+        },
+        body : JSON.stringify(dataReport)
+});
 
 });
+
+function formatFecha (fecha) {
+    let partesFecha = fecha.split("-");
+    let dia = partesFecha[0];
+    let mes = partesFecha[1];
+    let anio = partesFecha[2];
+    let nuevaFecha = `${anio}-${mes}-${dia}`
+    return nuevaFecha
+}

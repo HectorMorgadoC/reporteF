@@ -10,5 +10,10 @@ export class MyController {
         
     }
 
+    static async createReport(request,response) {
+
+        const body = request.body;
+        const createReport = await MysqlModel.createReport(body);
+    }
 
 }

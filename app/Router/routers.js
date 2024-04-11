@@ -5,9 +5,7 @@ export const router = Router();
 
     router.get('/',MyController.getAll)
 
-    router.post('/',async() => {
-
-    });
+    router.post('/',MyController.createReport);
 
     router.put('/',async() => {
 
