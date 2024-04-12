@@ -26,8 +26,45 @@ export class MysqlModel{
         return [resultReporters[0],resultDescription[0],resultWorkRoutine[0],resultAssigned[0]]
     }
 
-    static async getReport(){
+    static async getReports(){
+        const reports = 'SELECT * FROM reportero';
 
+        const resultReporters = await connection.query(reports);
+
+        return resultReporters[0];
+        
+    }
+
+    static async getReportsList(name){
+        const query = `SELECT id FROM reportero WHERE nombre = '${name}';`;
+        const consult = await connection.query(query);
+        
+
+        const queryList = `SELECT numero_orden,id_descripcion_maquina,id_asignado,fecha_aviso,fecha_ejecucion,reporte_falla FROM reporte WHERE id_reportero = '${consult[0][0].id}';`;
+        const consultList = await connection.query(queryList);
+
+        const reportsListResponse = async () => {
+            const result = [];
+            for(let reports of consultList[0]){
+            let queryDescription = `SELECT descripcion FROM descripcion_maquina WHERE id = '${reports.id_descripcion_maquina}';`;
+            let queryAsigned = `SELECT nombre FROM asignado WHERE id = '${reports.id_asignado}';`;
+            let consultDescription = await connection.query(queryDescription);
+            let consultAsigned = await connection.query(queryAsigned);
+
+            result.push({
+                numeroOrden : reports.numero_orden,
+                descripcion :consultDescription[0][0].descripcion,
+                asignado: consultAsigned[0][0].nombre,
+                fechaAviso: reports.fecha_aviso,
+                fechaEjecucion: reports.fecha_ejecucion,
+                reporteFalla: reports.reporte_falla,
+                })
+            }
+            return result
+            
+        }
+        return reportsListResponse();  
+    
     }
 
     static async createReport(dataReport){

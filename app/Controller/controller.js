@@ -10,10 +10,24 @@ export class MyController {
         
     }
 
+    static async getReports(request,response){
+
+        const result = JSON.stringify(await MysqlModel.getReports());
+        response.json(result);
+    }
+
+    static async getReportsList(request,response){
+        const nombre = request.params.name;
+        const reportList = await MysqlModel.getReportsList(nombre);
+        response.json(JSON.stringify(reportList))
+    }
+
     static async createReport(request,response) {
 
         const body = request.body;
         const createReport = await MysqlModel.createReport(body);
     }
+
+    
 
 }
