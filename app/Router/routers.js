@@ -9,6 +9,10 @@ export const router = Router();
 
     router.get('/reports/:name',MyController.getReportsList);
 
+    router.get('/machine',MyController.getMachine);
+
+    router.get('/machine/:description',MyController.getMachineList);
+
     router.post('/',MyController.createReport);
 
     

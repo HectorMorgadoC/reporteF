@@ -16,10 +16,22 @@ export class MyController {
         response.json(result);
     }
 
+    static async getMachine(request,response){
+
+        const result = JSON.stringify(await MysqlModel.getMachine());
+        response.json(result);
+    }
+
     static async getReportsList(request,response){
         const nombre = request.params.name;
         const reportList = await MysqlModel.getReportsList(nombre);
         response.json(JSON.stringify(reportList))
+    }
+
+    static async getMachineList(request,response){
+        const nombre = request.params.description;
+        const machineList = await MysqlModel.getMachineList(nombre);
+        response.json(JSON.stringify(machineList))
     }
 
     static async createReport(request,response) {

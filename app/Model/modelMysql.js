@@ -35,6 +35,15 @@ export class MysqlModel{
         
     }
 
+    static async getMachine(){
+        const machine = 'SELECT * FROM descripcion_maquina';
+
+        const resultMachine = await connection.query(machine);
+
+        return resultMachine[0];
+        
+    }
+
     static async getReportsList(name){
         const query = `SELECT id FROM reportero WHERE nombre = '${name}';`;
         const consult = await connection.query(query);
@@ -64,6 +73,38 @@ export class MysqlModel{
             
         }
         return reportsListResponse();  
+    
+    }
+
+    static async getMachineList(name){
+        const query = `SELECT id FROM descripcion_maquina WHERE descripcion = '${name}';`;
+        const consult = await connection.query(query);
+        
+
+        const queryList = `SELECT numero_orden,id_reportero,id_asignado,fecha_aviso,fecha_ejecucion,reporte_falla FROM reporte WHERE id_descripcion_maquina = '${consult[0][0].id}';`;
+        const consultList = await connection.query(queryList);
+
+        const machineListResponse = async () => {
+            const result = [];
+            for(let machine of consultList[0]){
+            let queryDescription = `SELECT nombre FROM reportero WHERE id = '${machine.id_reportero}';`;
+            let queryAsigned = `SELECT nombre FROM asignado WHERE id = '${machine.id_asignado}';`;
+            let consultReports = await connection.query(queryDescription);
+            let consultAsigned = await connection.query(queryAsigned);
+
+            result.push({
+                numeroOrden : machine.numero_orden,
+                reportero :consultReports[0][0].nombre,
+                asignado: consultAsigned[0][0].nombre,
+                fechaAviso: machine.fecha_aviso,
+                fechaEjecucion: machine.fecha_ejecucion,
+                reporteFalla: machine.reporte_falla,
+                })
+            }
+            return result
+            
+        }
+        return machineListResponse();  
     
     }
 
