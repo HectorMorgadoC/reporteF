@@ -11,16 +11,20 @@ export class MyController {
     }
 
     static async getReports(request,response){
-
         const result = JSON.stringify(await MysqlModel.getReports());
         response.json(result);
     }
 
     static async getMachine(request,response){
-
         const result = JSON.stringify(await MysqlModel.getMachine());
         response.json(result);
     }
+    
+    static async getOrder(request,response){
+        const result = JSON.stringify(await MysqlModel.getOrder());
+        response.json(result);
+    }
+
 
     static async getReportsList(request,response){
         const nombre = request.params.name;
@@ -33,6 +37,13 @@ export class MyController {
         const machineList = await MysqlModel.getMachineList(nombre);
         response.json(JSON.stringify(machineList))
     }
+
+    static async getOrderList(request,response){
+        const numberOrder = Number(request.params.number);
+        const orderList = await MysqlModel.getOrderList(numberOrder);
+        response.json(JSON.stringify(orderList));
+    }
+
 
     static async createReport(request,response) {
 

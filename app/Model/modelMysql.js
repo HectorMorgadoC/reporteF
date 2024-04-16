@@ -44,6 +44,14 @@ export class MysqlModel{
         
     }
 
+    static async getOrder(){
+        const order = 'SELECT numero_orden FROM reporte';
+
+        const resultOrder = await connection.query(order);
+
+        return resultOrder[0];
+    }
+
     static async getReportsList(name){
         const query = `SELECT id FROM reportero WHERE nombre = '${name}';`;
         const consult = await connection.query(query);
@@ -106,6 +114,36 @@ export class MysqlModel{
         }
         return machineListResponse();  
     
+    }
+
+    static async getOrderList(numberOrder){
+        
+        const queryList = `SELECT id_descripcion_maquina,id_reportero,id_asignado,fecha_aviso,fecha_ejecucion,reporte_falla FROM reporte WHERE numero_orden = ${numberOrder};`;
+        const consultList = await connection.query(queryList);
+
+        const orderListResponse = async () => {
+            const result = [];
+            for(let order of consultList[0]){
+            let queryDescription = `SELECT descripcion FROM descripcion_maquina WHERE id = '${order.id_descripcion_maquina}';`;
+            let queryReportero = `SELECT nombre FROM reportero WHERE id = '${order.id_reportero}';`;
+            let queryAsigned = `SELECT nombre FROM asignado WHERE id = '${order.id_asignado}';`;
+            let consultDescription = await connection.query(queryDescription);
+            let consultReports = await connection.query(queryReportero);
+            let consultAsigned = await connection.query(queryAsigned);
+
+            result.push({
+                descripcionMaquina : consultDescription[0][0].descripcion,
+                reportero :consultReports[0][0].nombre,
+                asignado: consultAsigned[0][0].nombre,
+                fechaAviso: order.fecha_aviso,
+                fechaEjecucion: order.fecha_ejecucion,
+                reporteFalla: order.reporte_falla,
+                })
+            }
+            return result
+            
+        }
+        return orderListResponse();  
     }
 
     static async createReport(dataReport){

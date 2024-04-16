@@ -1,10 +1,10 @@
-const select = document.getElementById('reports');
+const select = document.getElementById('order');
 const list = document.getElementById('list');
 
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('http://localhost:5000/reports', {
+        const response = await fetch('http://localhost:5000/order', {
             method: 'GET'
         });
 
@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = await response.json(); // Parsea la respuesta como JSON
             const totalData = JSON.parse(data);
             
-            for( let reports of totalData ){
+            for( let order of totalData ){
                 const optionReports = document.createElement('option');
-                optionReports.innerHTML = reports.nombre;
+                optionReports.innerHTML = order.numero_orden;
                 select.appendChild(optionReports);
             }
 
@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+
+
 document.addEventListener('submit', async (e) => {
     e.preventDefault()
     const tableExist = document.querySelector('table');
@@ -36,11 +38,11 @@ document.addEventListener('submit', async (e) => {
 
     const table = document.createElement('table');
     const titleTable = document.createElement('tr');
-    const titleCode = document.createElement('td');
-
-    titleCode.innerText = ' N_ Orden';
+    
     const titleDescription = document.createElement('td');
-    titleDescription.innerText = ' Descripcion';
+    titleDescription.innerText = ' Descripcion_maquina';
+    const titleReport = document.createElement('td');
+    titleReport.innerText = ' Reportero';
     const titleAsigned = document.createElement('td');
     titleAsigned.innerText = 'Asignado';
     const titleDateWarning = document.createElement('td');
@@ -50,42 +52,41 @@ document.addEventListener('submit', async (e) => {
     const titleReportFault = document.createElement('td');
     titleReportFault.innerText = 'Reporte de falla';
 
-    titleTable.appendChild(titleCode);
     titleTable.appendChild(titleDescription);
+    titleTable.appendChild(titleReport);
     titleTable.appendChild(titleAsigned);
     titleTable.appendChild(titleDateWarning);
     titleTable.appendChild(titleDateExecute);
     titleTable.appendChild(titleReportFault);
     table.appendChild(titleTable);
 
-    const nameReports = await select.value;
+    const orderReports = await select.value;
 
     try {
-        const response = await fetch(`http://localhost:5000/reports/${nameReports}`,
+        const response = await fetch(`http://localhost:5000/order/${orderReports}`,
         { method:'GET'});
 
         const data = JSON.parse(await response.json());
         
         for(let result of data){
             const listResult = document.createElement('tr');
-            const numeroOrden = document.createElement('td');
-            const descripcion = document.createElement('td');
+            const descripcion_maquina = document.createElement('td');
+            const reportero = document.createElement('td');
             const asignado = document.createElement('td');
             const fechaAviso = document.createElement('td');
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
             const buttonReport = document.createElement('button');
             buttonReport.innerText = 'Imprimir';
-
-            numeroOrden.innerText = result.numeroOrden;
-            descripcion.innerText = result.descripcion;
+            descripcion_maquina.innerText = result.descripcionMaquina;
+            reportero.innerText = result.reportero;
             asignado.innerText =   result.asignado;
             fechaAviso.innerText = result.fechaAviso;
             fechaEjecucion.innerText = result.fechaEjecucion;
             reporteFalla.innerText = result.reporteFalla;
 
-            listResult.appendChild(numeroOrden);
-            listResult.appendChild(descripcion);
+            listResult.appendChild(descripcion_maquina);
+            listResult.appendChild(reportero);
             listResult.appendChild(asignado);
             listResult.appendChild(fechaAviso);
             listResult.appendChild(fechaEjecucion);
@@ -93,6 +94,7 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(buttonReport);
             table.appendChild(listResult)
             list.appendChild(table);
+            
             
         }
 

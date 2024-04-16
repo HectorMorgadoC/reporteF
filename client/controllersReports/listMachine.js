@@ -76,6 +76,8 @@ document.addEventListener('submit', async (e) => {
             const fechaAviso = document.createElement('td');
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
+            const buttonReport = document.createElement('button');
+            buttonReport.innerText = 'Imprimir';
 
             numeroOrden.innerText = result.numeroOrden;
             reportero.innerText = result.reportero;
@@ -90,6 +92,7 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(fechaAviso);
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
+            listResult.appendChild(buttonReport);
             table.appendChild(listResult)
             list.appendChild(table);
             

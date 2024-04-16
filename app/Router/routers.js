@@ -13,6 +13,10 @@ export const router = Router();
 
     router.get('/machine/:description',MyController.getMachineList);
 
+    router.get('/order',MyController.getOrder);
+
+    router.get('/order/:number',MyController.getOrderList);
+
     router.post('/',MyController.createReport);
 
     
