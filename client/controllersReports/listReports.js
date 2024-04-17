@@ -1,5 +1,8 @@
+import { buttonGet } from "./listData.js";
+
 const select = document.getElementById('reports');
 const list = document.getElementById('list');
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -29,7 +32,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('submit', async (e) => {
     e.preventDefault()
     const tableExist = document.querySelector('table');
-    
+    const reportPrint = document.querySelector('#reportPrint');
+
+    if(reportPrint){
+        reportPrint.remove()
+    }
+
+
     if(tableExist){
         tableExist.remove()
     }
@@ -65,6 +74,7 @@ document.addEventListener('submit', async (e) => {
         { method:'GET'});
 
         const data = JSON.parse(await response.json());
+        console.log(data);
         
         for(let result of data){
             const listResult = document.createElement('tr');
@@ -76,6 +86,8 @@ document.addEventListener('submit', async (e) => {
             const reporteFalla = document.createElement('td');
             const buttonReport = document.createElement('button');
             buttonReport.innerText = 'Imprimir';
+            
+            
 
             numeroOrden.innerText = result.numeroOrden;
             descripcion.innerText = result.descripcion;
@@ -94,13 +106,13 @@ document.addEventListener('submit', async (e) => {
             table.appendChild(listResult)
             list.appendChild(table);
             
+            buttonGet(buttonReport,result);
         }
+        
 
-
-    
     } catch (error) {
         console.error( 'Error al realizar peticion: '+ error)
     }
 
-
 })
+

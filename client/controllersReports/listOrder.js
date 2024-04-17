@@ -1,3 +1,5 @@
+import { buttonGet } from "./listData.js";
+
 const select = document.getElementById('order');
 const list = document.getElementById('list');
 
@@ -95,7 +97,7 @@ document.addEventListener('submit', async (e) => {
             table.appendChild(listResult)
             list.appendChild(table);
             
-            
+            buttonGet(buttonReport,result);
         }
 
 

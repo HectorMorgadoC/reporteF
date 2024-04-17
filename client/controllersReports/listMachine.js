@@ -1,3 +1,5 @@
+import { buttonGet } from "./listData.js";
+
 const select = document.getElementById('machine');
 const list = document.getElementById('list');
 
@@ -95,6 +97,8 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(buttonReport);
             table.appendChild(listResult)
             list.appendChild(table);
+
+            buttonGet(buttonReport,result);
             
         }
 
