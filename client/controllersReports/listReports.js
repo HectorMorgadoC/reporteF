@@ -1,4 +1,5 @@
 import { buttonGet } from "./listData.js";
+import { updateReport } from "./listUpdate.js";
 
 const select = document.getElementById('reports');
 const list = document.getElementById('list');
@@ -85,7 +86,9 @@ document.addEventListener('submit', async (e) => {
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
             const buttonReport = document.createElement('button');
+            const buttonUpdate = document.createElement('button');
             buttonReport.innerText = 'Imprimir';
+            buttonUpdate.innerText = 'Modificar';
             
             
 
@@ -103,10 +106,12 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
             listResult.appendChild(buttonReport);
+            listResult.appendChild(buttonUpdate);
             table.appendChild(listResult)
             list.appendChild(table);
             
             buttonGet(buttonReport,result);
+            updateReport(buttonUpdate,result);
         }
         
 
