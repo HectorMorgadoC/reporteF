@@ -51,6 +51,10 @@ export class MyController {
         const createReport = await MysqlModel.createReport(body);
     }
 
-    
+    static async updateReport(request,response) {
+        const numberOrder = Number(request.params.number);
+        const body = request.body;
+        const updateDataReport = MysqlModel.updateReport(numberOrder,body );
+    }
 
 }

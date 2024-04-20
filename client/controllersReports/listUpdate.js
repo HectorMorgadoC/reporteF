@@ -1,10 +1,12 @@
 export function updateReport(button,data){
     button.addEventListener('click',() => {
+        console.log(data);
         let { 
             numeroOrden,
             reportero,
             asignado,
             descripcion,
+            rutinaTrabajo,
             fechaAviso,
             fechaEjecucion,
             reporteFalla,
@@ -21,6 +23,8 @@ export function updateReport(button,data){
         const inputReportero = document.createElement('input');
         const labelAsignado = document.createElement('label');
         const inputAsignado = document.createElement('input');
+        const labelRutinaTrabajo = document.createElement('label');
+        const inputRutinaTrabajo = document.createElement('input');
         const labelDescripcion = document.createElement('label');
         const inputDescripcion = document.createElement('input');
         const labelFechaAviso = document.createElement('label');
@@ -44,6 +48,8 @@ export function updateReport(button,data){
         inputAsignado.value = asignado;
         labelDescripcion.innerHTML = 'Descripcion_maquina: ';
         inputDescripcion.value = descripcion;
+        labelRutinaTrabajo.innerHTML = 'Rutina_trabajo';
+        inputRutinaTrabajo.value = rutinaTrabajo;
         labelFechaAviso.innerHTML = 'Fecha_aviso: ';
         inputFechaAviso.value = fechaAviso;
         labelFechaEjecucion.innerHTML = 'Fecha_ejecucion: ';
@@ -69,6 +75,8 @@ export function updateReport(button,data){
         form.appendChild(inputAsignado);
         form.appendChild(labelDescripcion);
         form.appendChild(inputDescripcion);
+        form.appendChild(labelRutinaTrabajo);
+        form.appendChild(inputRutinaTrabajo);
         form.appendChild(labelFechaAviso);
         form.appendChild(inputFechaAviso);
         form.appendChild(labelFechaEjecucion);
@@ -82,13 +90,35 @@ export function updateReport(button,data){
         form.appendChild(update);
         list.appendChild(form);
 
-        update.addEventListener('click',(e) => {
+        update.addEventListener('submit',async (e) => {
             e.preventDefault()
-            console.log(data)
+        })
+
+        update.addEventListener('click',async() => {
+
+            const dataUpdate = {
+                reportero : inputReportero.value,
+                asignado: inputAsignado.value,
+                descripcion: inputDescripcion.value,
+                rutinaTrabajo: inputRutinaTrabajo.value,
+                fechaAviso: inputFechaAviso.value,
+                fechaEjecucion: inputFechaEjecucion.value,
+                reporteFalla: inputReporteFalla.value,
+                trabajoEfectuar: inputTrabajoEjecutar.value,
+                comentarios: inputComentarios.value
+            }
+            dataUpdate.fechaAviso = dataUpdate.fechaAviso.split('T')[0];
+            dataUpdate.fechaEjecucion = dataUpdate.fechaEjecucion.split('T')[0];
+            const response = fetch(`http://localhost:5000/update/${numeroOrden}`,{
+                method: 'PATCH',
+                headers: {
+                    'Content-type':'json/application'
+                },
+                body: JSON.stringify(dataUpdate)
+            })
         })
         
 
-        console.log(data)
 
     })
 }

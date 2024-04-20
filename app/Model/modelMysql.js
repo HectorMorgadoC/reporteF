@@ -65,14 +65,17 @@ export class MysqlModel{
             for(let reports of consultList[0]){
             let queryDescription = `SELECT descripcion FROM descripcion_maquina WHERE id = '${reports.id_descripcion_maquina}';`;
             let queryAsigned = `SELECT nombre FROM asignado WHERE id = '${reports.id_asignado}';`;
+            let queryWorkRoutine = `SELECT descripcion FROM rutina_trabajo WHERE id = '${reports.id_rutina_trabajo}';`;
             let consultDescription = await connection.query(queryDescription);
             let consultAsigned = await connection.query(queryAsigned);
+            let consultWorkRoutine = await connection.query(queryWorkRoutine);
 
             result.push({
                 numeroOrden : reports.numero_orden,
                 descripcion :consultDescription[0][0].descripcion,
                 reportero: name,
                 asignado: consultAsigned[0][0].nombre,
+                rutinaTrabajo: consultWorkRoutine[0][0].descripcion,
                 fechaAviso: reports.fecha_aviso,
                 fechaEjecucion: reports.fecha_ejecucion,
                 reporteFalla: reports.reporte_falla,
@@ -195,7 +198,37 @@ export class MysqlModel{
 
     }
 
-    static async updateReport(){
+    static async updateReport (number, data ){
+        const order = number;
+    
+        const {
+            reportero,
+            asignado,
+            descripcion,
+            rutinaTrabajo,
+            fechaAviso,
+            fechaEjecucion,
+            reporteFalla,
+            trabajoEfectuar,
+            comentarios
+        } = data;
+
+
+        const queryIdReportero = `SELECT id FROM reportero WHERE nombre = '${reportero}';`;
+        const queryAsignado = `SELECT id FROM asignado WHERE nombre = '${asignado}';`;
+        const queryDescripcion = `SELECT id FROM descripcion_maquina WHERE descripcion = '${descripcion}';`;
+        const queryRutinaTrabajo = `SELECT id FROM rutina_trabajo WHERE descripcion = '${rutinaTrabajo}'`
+
+        const idReportero = await connection.query(queryIdReportero);
+        const idAsignado = await connection.query(queryAsignado);
+        const idDescripcion = await connection.query(queryDescripcion);
+        const idRutinaTrabajo = await connection.query(queryRutinaTrabajo);
+        
+        const queryUpdate = `UPDATE reporte SET id_descripcion_maquina = '${idDescripcion[0][0].id}', id_reportero = '${idReportero[0][0].id}', id_asignado = '${idAsignado[0][0].id}', id_rutina_trabajo = '${idRutinaTrabajo[0][0].id}', fecha_aviso = '${fechaAviso}', fecha_ejecucion = '${fechaEjecucion}', reporte_falla = '${reporteFalla}', trabajo_efectuar = '${trabajoEfectuar}', comentarios = '${comentarios}' WHERE numero_orden = ${order};`;
+        const update = await connection.query(queryUpdate);
+        
+        return update;
+
 
     }
 

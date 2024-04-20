@@ -19,11 +19,7 @@ export const router = Router();
 
     router.post('/',MyController.createReport);
 
-    
-
-    router.put('/',async() => {
-
-    });
+    router.patch('/update/:number',MyController.updateReport);
 
     router.delete('/',async() => {
 

@@ -3,6 +3,7 @@ import { updateReport } from "./listUpdate.js";
 
 const select = document.getElementById('reports');
 const list = document.getElementById('list');
+const button = document.getElementById('buttonInp');
 
 
 
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-document.addEventListener('submit', async (e) => {
+button.addEventListener('click', async (e) => {
     e.preventDefault()
     const tableExist = document.querySelector('table');
     const reportPrint = document.querySelector('#reportPrint');
@@ -53,6 +54,8 @@ document.addEventListener('submit', async (e) => {
     titleDescription.innerText = ' Descripcion';
     const titleAsigned = document.createElement('td');
     titleAsigned.innerText = 'Asignado';
+    const titleWorkRoutine = document.createElement('td');
+    titleWorkRoutine.innerText = 'Rutina de trabajo';
     const titleDateWarning = document.createElement('td');
     titleDateWarning.innerText = 'Fecha de aviso';
     const titleDateExecute = document.createElement('td');
@@ -63,6 +66,7 @@ document.addEventListener('submit', async (e) => {
     titleTable.appendChild(titleCode);
     titleTable.appendChild(titleDescription);
     titleTable.appendChild(titleAsigned);
+    titleTable.appendChild(titleWorkRoutine);
     titleTable.appendChild(titleDateWarning);
     titleTable.appendChild(titleDateExecute);
     titleTable.appendChild(titleReportFault);
@@ -82,6 +86,7 @@ document.addEventListener('submit', async (e) => {
             const numeroOrden = document.createElement('td');
             const descripcion = document.createElement('td');
             const asignado = document.createElement('td');
+            const rutinaTrabajo = document.createElement('td');
             const fechaAviso = document.createElement('td');
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
@@ -95,6 +100,7 @@ document.addEventListener('submit', async (e) => {
             numeroOrden.innerText = result.numeroOrden;
             descripcion.innerText = result.descripcion;
             asignado.innerText =   result.asignado;
+            rutinaTrabajo.innerText = result.rutinaTrabajo;
             fechaAviso.innerText = result.fechaAviso;
             fechaEjecucion.innerText = result.fechaEjecucion;
             reporteFalla.innerText = result.reporteFalla;
@@ -102,6 +108,7 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(numeroOrden);
             listResult.appendChild(descripcion);
             listResult.appendChild(asignado);
+            listResult.appendChild(rutinaTrabajo);
             listResult.appendChild(fechaAviso);
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
