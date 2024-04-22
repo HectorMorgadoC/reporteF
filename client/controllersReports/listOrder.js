@@ -1,4 +1,6 @@
 import { buttonGet } from "./listData.js";
+import { updateReport } from "./listUpdate.js";
+import { reportDelete } from "./listDelete.js";
 
 const select = document.getElementById('order');
 const list = document.getElementById('list');
@@ -53,6 +55,7 @@ document.addEventListener('submit', async (e) => {
     titleDateExecute.innerText = 'Fecha de ejecucion';
     const titleReportFault = document.createElement('td');
     titleReportFault.innerText = 'Reporte de falla';
+    
 
     titleTable.appendChild(titleDescription);
     titleTable.appendChild(titleReport);
@@ -79,7 +82,12 @@ document.addEventListener('submit', async (e) => {
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
             const buttonReport = document.createElement('button');
+            const buttonUpdate = document.createElement('button');
+            const buttonDelete = document.createElement('button');
             buttonReport.innerText = 'Imprimir';
+            buttonUpdate.innerText = 'Modificar';
+            buttonDelete.innerText = 'eliminar';
+            
             descripcion_maquina.innerText = result.descripcionMaquina;
             reportero.innerText = result.reportero;
             asignado.innerText =   result.asignado;
@@ -94,10 +102,14 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
             listResult.appendChild(buttonReport);
-            table.appendChild(listResult)
+            listResult.appendChild(buttonUpdate);
+            listResult.appendChild(buttonDelete);
+            table.appendChild(listResult);
             list.appendChild(table);
             
             buttonGet(buttonReport,result);
+            updateReport(buttonUpdate,result);
+            reportDelete(buttonDelete,result.numeroOrden);
         }
 
 

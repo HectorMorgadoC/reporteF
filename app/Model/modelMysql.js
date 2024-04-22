@@ -232,7 +232,15 @@ export class MysqlModel{
 
     }
 
-    static async deleteReport(){
+    static async deleteReport(number){
+        const queryId = `SELECT id FROM reporte WHERE numero_orden = ${number}`
 
+        const idReport = await connection.query(queryId);
+
+        const queryResponse = `DELETE FROM reporte WHERE id = '${idReport[0][0].id}'`
+
+        const deleteReportId = await connection.query(queryResponse);
+
+        return deleteReportId
     }
 }

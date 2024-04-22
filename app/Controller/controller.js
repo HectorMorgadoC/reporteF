@@ -57,4 +57,11 @@ export class MyController {
         const updateDataReport = MysqlModel.updateReport(numberOrder,body );
     }
 
+    static async deleteReport(request,response) {
+        const numberOrder = Number(request.params.number);
+        const deleteReport = await MysqlModel.deleteReport(numberOrder);
+        response.json(JSON.stringify(deleteReport));
+        
+    }
+
 }

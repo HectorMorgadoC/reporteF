@@ -1,5 +1,6 @@
 import { buttonGet } from "./listData.js";
 import { updateReport } from "./listUpdate.js";
+import { reportDelete } from "./listDelete.js";
 
 const select = document.getElementById('reports');
 const list = document.getElementById('list');
@@ -92,8 +93,10 @@ button.addEventListener('click', async (e) => {
             const reporteFalla = document.createElement('td');
             const buttonReport = document.createElement('button');
             const buttonUpdate = document.createElement('button');
+            const buttonDelete = document.createElement('button');
             buttonReport.innerText = 'Imprimir';
             buttonUpdate.innerText = 'Modificar';
+            buttonDelete.innerText = 'eliminar';
             
             
 
@@ -114,11 +117,13 @@ button.addEventListener('click', async (e) => {
             listResult.appendChild(reporteFalla);
             listResult.appendChild(buttonReport);
             listResult.appendChild(buttonUpdate);
+            listResult.appendChild(buttonDelete);
             table.appendChild(listResult)
             list.appendChild(table);
             
             buttonGet(buttonReport,result);
             updateReport(buttonUpdate,result);
+            reportDelete(buttonDelete,result.numeroOrden);
         }
         
 

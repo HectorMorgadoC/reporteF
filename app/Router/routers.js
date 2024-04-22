@@ -21,8 +21,6 @@ export const router = Router();
 
     router.patch('/update/:number',MyController.updateReport);
 
-    router.delete('/',async() => {
-
-    });
+    router.post('/delete/:number',MyController.deleteReport);
 
 router.get('/reports/:name', MyController.getReportsList)

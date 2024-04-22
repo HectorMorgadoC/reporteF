@@ -79,7 +79,11 @@ document.addEventListener('submit', async (e) => {
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
             const buttonReport = document.createElement('button');
+            const buttonUpdate = document.createElement('button');
+            const buttonDelete = document.createElement('button');
             buttonReport.innerText = 'Imprimir';
+            buttonUpdate.innerText = 'Modificar';
+            buttonDelete.innerText = 'eliminar';
 
             numeroOrden.innerText = result.numeroOrden;
             reportero.innerText = result.reportero;
@@ -95,10 +99,14 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
             listResult.appendChild(buttonReport);
+            listResult.appendChild(buttonUpdate);
+            listResult.appendChild(buttonDelete);
             table.appendChild(listResult)
             list.appendChild(table);
 
             buttonGet(buttonReport,result);
+            updateReport(buttonUpdate,result);
+            reportDelete(buttonDelete,result.numeroOrden);
             
         }
 
