@@ -1,4 +1,6 @@
 import { buttonGet } from "./listData.js";
+import { updateReport } from "./listUpdate.js";
+import { reportDelete } from "./listDelete.js";
 
 const select = document.getElementById('machine');
 const list = document.getElementById('list');
@@ -33,11 +35,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('submit', async (e) => {
     e.preventDefault()
     const tableExist = document.querySelector('table');
+    const formReports = document.querySelector('form');
+    const reportPrint = document.querySelector('#reportPrint');
+
+    if(formReports){
+        formReports.remove()
+    }
     
     if(tableExist){
         tableExist.remove()
     }
 
+    if(reportPrint){
+        reportPrint.remove()
+    }
     const table = document.createElement('table');
     const titleTable = document.createElement('tr');
     const titleCode = document.createElement('td');

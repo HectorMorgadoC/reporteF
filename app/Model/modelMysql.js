@@ -191,11 +191,13 @@ export class MysqlModel{
             const ingresoReporte = `INSERT INTO reporte(id_descripcion_maquina,id_rutina_trabajo,id_reportero,id_asignado,fecha_aviso,fecha_ejecucion,reporte_falla,trabajo_efectuar,comentarios) VALUES('${idDescription}','${idRutina}','${idReportero}','${idAsignado}','${fechaAviso}','${fechaEjecucion}','${reporteFalla}','${trabajoEfectuar}','${comentarios}');` 
 
             const newReport = await connection.query(ingresoReporte)
+            return newReport
 
         } catch (error) {
             console.log('Error de consulta: '+ error)
+            return error
         }
-
+    
     }
 
     static async updateReport (number, data ){

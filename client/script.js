@@ -9,6 +9,7 @@ const selectAssigned = document.getElementById('assigned');
 const selectTitleText = document.getElementById('titleText');
 const selectReport = document.getElementById('report');
 const selectComment = document.getElementById('comment');
+const submit = document.getElementById('submit');
 
 
 
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-formData.addEventListener('submit',e => {
+formData.addEventListener('submit',async(e) => {
     e.preventDefault()
 
     const dataReport = {
@@ -69,15 +70,11 @@ formData.addEventListener('submit',e => {
         comentarios: selectComment.value,
     }
 
-    fetch('http://localhost:5000/', {
-        method : 'post',
-        header: {
-            'Content-Type':'Application/json'
-        },
-        body : JSON.stringify(dataReport)
+    request(dataReport)
+    
 });
 
-});
+
 
 function formatFecha (fecha) {
     let partesFecha = fecha.split("-");
@@ -87,3 +84,20 @@ function formatFecha (fecha) {
     let nuevaFecha = `${anio}-${mes}-${dia}`
     return nuevaFecha
 }
+
+async function request(dataReport){
+        const response = await fetch('http://localhost:5000/', {
+        method : 'post',
+        header: {
+            'Content-Type':'Application/json'
+        },
+        body : JSON.stringify(dataReport)
+        });
+
+        let data = await response.json();
+
+        data = JSON.parse(data);
+
+        console.log(data)
+        const redirect = (data[0].affectedRows === 1) ? window.location.href = '../index.html' : console.log('Problemas al registrar el reporte');
+    } 

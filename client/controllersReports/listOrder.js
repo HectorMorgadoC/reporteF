@@ -35,9 +35,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('submit', async (e) => {
     e.preventDefault()
     const tableExist = document.querySelector('table');
+    const formReports = document.querySelector('form');
+    const reportPrint = document.querySelector('#reportPrint');
+
+    if(formReports){
+        formReports.remove()
+    }
     
     if(tableExist){
         tableExist.remove()
+    }
+
+    if(reportPrint){
+        reportPrint.remove()
     }
 
     const table = document.createElement('table');

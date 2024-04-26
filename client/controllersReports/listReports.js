@@ -36,11 +36,15 @@ button.addEventListener('click', async (e) => {
     e.preventDefault()
     const tableExist = document.querySelector('table');
     const reportPrint = document.querySelector('#reportPrint');
+    const formReports = document.querySelector('form');
+
+    if(formReports){
+        formReports.remove()
+    }
 
     if(reportPrint){
         reportPrint.remove()
     }
-
 
     if(tableExist){
         tableExist.remove()
