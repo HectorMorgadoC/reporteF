@@ -37,6 +37,11 @@ button.addEventListener('click', async (e) => {
     const tableExist = document.querySelector('table');
     const reportPrint = document.querySelector('#reportPrint');
     const formReports = document.querySelector('form');
+    const sectionReports = document.querySelector('section');
+
+    if(sectionReports){
+        sectionReports.remove()
+    }
 
     if(formReports){
         formReports.remove()
@@ -52,6 +57,7 @@ button.addEventListener('click', async (e) => {
 
     const table = document.createElement('table');
     const titleTable = document.createElement('tr');
+    titleTable.classList.add('title-table');
     const titleCode = document.createElement('td');
 
     titleCode.innerText = ' N_ Orden';
@@ -67,6 +73,8 @@ button.addEventListener('click', async (e) => {
     titleDateExecute.innerText = 'Fecha de ejecucion';
     const titleReportFault = document.createElement('td');
     titleReportFault.innerText = 'Reporte de falla';
+    const titleOption = document.createElement('td');
+    titleOption.innerText = 'Opciones';
 
     titleTable.appendChild(titleCode);
     titleTable.appendChild(titleDescription);
@@ -75,6 +83,7 @@ button.addEventListener('click', async (e) => {
     titleTable.appendChild(titleDateWarning);
     titleTable.appendChild(titleDateExecute);
     titleTable.appendChild(titleReportFault);
+    titleTable.appendChild(titleOption);
     table.appendChild(titleTable);
 
     const nameReports = await select.value;
@@ -95,14 +104,18 @@ button.addEventListener('click', async (e) => {
             const fechaAviso = document.createElement('td');
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
+            const buttonTable = document.createElement('td');
             const buttonReport = document.createElement('button');
             const buttonUpdate = document.createElement('button');
             const buttonDelete = document.createElement('button');
+            buttonTable.classList.add('table-button');
+            buttonTable.appendChild(buttonReport);
             buttonReport.innerText = 'Imprimir';
             buttonUpdate.innerText = 'Modificar';
             buttonDelete.innerText = 'eliminar';
-            
-            
+            buttonTable.appendChild(buttonReport);
+            buttonTable.appendChild(buttonUpdate);
+            buttonTable.appendChild(buttonDelete);
 
             numeroOrden.innerText = result.numeroOrden;
             descripcion.innerText = result.descripcion;
@@ -119,9 +132,7 @@ button.addEventListener('click', async (e) => {
             listResult.appendChild(fechaAviso);
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
-            listResult.appendChild(buttonReport);
-            listResult.appendChild(buttonUpdate);
-            listResult.appendChild(buttonDelete);
+            listResult.appendChild(buttonTable);
             table.appendChild(listResult)
             list.appendChild(table);
             

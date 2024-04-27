@@ -19,24 +19,34 @@ export function updateReport(button,data){
         const form = document.createElement('form')
         const labelNumeroOrden = document.createElement('label');
         const inputNumeroOrden = document.createElement('input');
+        inputNumeroOrden.setAttribute('type','text');
         const labelReportero = document.createElement('label');
         const inputReportero = document.createElement('input');
+        inputReportero.setAttribute("type","text");
         const labelAsignado = document.createElement('label');
         const inputAsignado = document.createElement('input');
+        inputAsignado.setAttribute('type','text');
         const labelRutinaTrabajo = document.createElement('label');
         const inputRutinaTrabajo = document.createElement('input');
+        inputRutinaTrabajo.setAttribute('type','text');
         const labelDescripcion = document.createElement('label');
         const inputDescripcion = document.createElement('input');
+        inputDescripcion.setAttribute('type','text');
         const labelFechaAviso = document.createElement('label');
         const inputFechaAviso = document.createElement('input');
         const labelFechaEjecucion = document.createElement('label');
         const inputFechaEjecucion = document.createElement('input');
+        inputFechaEjecucion.setAttribute('type','datetime');
+        inputFechaAviso.setAttribute('type','datetime');
         const labelReporteFalla = document.createElement('label');
         const inputReporteFalla = document.createElement('input');
+        inputReporteFalla.setAttribute('type','text');
         const labelTrabajoEjecutar = document.createElement('label');
         const inputTrabajoEjecutar = document.createElement('input');
+        inputTrabajoEjecutar.setAttribute('type','text');
         const labelComentarios = document.createElement('label');
         const inputComentarios = document.createElement('input');
+        inputComentarios.setAttribute('type','text');
         const update = document.createElement('button');
 
         update.innerText = 'Modificar';

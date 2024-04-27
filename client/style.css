@@ -1,35 +1,252 @@
-input,select {
-    padding: .5em 4em;
+
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.main{
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+main {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 
-.subMain{
-    display:inline-flex;
-    justify-content: stretch;
-    
-    
+h1 {
+    font-size: 28px;
+    color: #ffffff;
 }
 
-
-
-.containerForm{
-    display: inline-flex;
-    flex-direction: column;
+/* Estilos para los enlaces botón */
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(206, 70, 70);
+    /* Naranja */
+    border: 2px solid rgb(206, 70, 70);
+    /* Naranja */
+    transition: all 0.3s ease;
 }
 
-.containerAForm{
-    display: flex;
-    margin-left: 30em;
+a.button:hover {
+    background-color: rgb(153, 33, 33);
+    /* Naranja oscuro */
+    border-color: rgb(153, 33, 33);
+    /* Naranja oscuro */
 }
 
-.container{
-    display: inline-flex;
-    flex-direction: column;
+/* Estilos para los campos de formulario */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="datetime"],
+form input[type="text"],
+form select {
+    width: 100%;
     padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+form input[type="submit"] {
+    width: 25%;
+    padding: 15px;
+    border: none;
+    background-color: rgb(206, 70, 70);
+    /* Naranja */
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    
+}
+
+form input[type="submit"]:hover {
+    background-color: rgb(153, 33, 33);
+    /* Naranja oscuro */
+}
+
+button{
+    width: 25%;
+        padding: 15px;
+        border: none;
+        background-color: rgb(206, 70, 70);
+        /* Naranja */
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 0 auto;
+}
+
+button:hover{
+    background-color: rgb(153, 33, 33);
+}
+header {
+    display: flex;
+    background-color: #131212;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+
+}
+
+.logo img {
     margin: 10px;
-    border: .5px solid black;
+    width: 150px;
+    /* Ajusta el tamaño del logo según sea necesario */
+}
+
+.header-title h1 {
+    margin-left: 15em;
+    margin-top: 20px;
+}
+
+/* Estilos para el menú de reportes */
+aside {
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 250px;
+    float: left;
+    margin-right: 20px;
+}
+
+.list {
+    margin-bottom: 20px;
+}
+
+.list h2 {
+    margin-bottom: 10px;
+}
+
+.list a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(206, 70, 70);
+    /* Naranja */
+    padding: 10px;
+}
+
+.list a:hover {
+    background-color: rgb(153, 33, 33);
+    /* Naranja oscuro */
+}
+
+/* Estilos para el formulario */
+section {
+    float: left;
+    width: calc(100% - 290px); /* 250px del menú de reportes + 20px de margen derecho */
+    padding: 20px;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilos para las celdas de encabezado */
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Estilos alternados para filas */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-button button {
+    padding: 5px 50px;
+    margin: 5px 0;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(206, 70, 70);
+    /* Naranja */
+    color: white;
+    transition: background-color 0.3s ease;
+    /* max-width: 100%;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-button button:hover {
+    background-color: rgb(153, 33, 33);
+    /* Naranja oscuro */
+}
+
+.title-table{
+    background-color: rgb(153, 33, 33);
+    color: white;
+}
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-title h1 {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    aside {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    section {
+        width: 100%;
+        margin-top: 20px;
+        /* Añade espacio entre el formulario y el menú en dispositivos móviles */
+    }
+
+    form input[type="submit"] {
+        width: 100%;
+    }
 }

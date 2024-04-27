@@ -6,61 +6,67 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <main>
-        <div class="main">
-            <div>
-                <div>
-                    <img src="" alt="">
-                </div>
-                <div>
-                    <h1>Reporte de Mantenimiento</h1>
-                </div>
-            </div>
-            <div class="subMain">
-                <div id="list">
-                    <h2> Lista de reportes matfilm </h2>
-                    <a href="./listReport/listReports.html">Por reportero</a>
-                    <a href="./listReport/listMachine.html">Por maquina</a>
-                    <a href="./listReport/listOrder.html">Por numero de orden</a>
-                </div>
-                <div class="containerAForm">
-                    <form action="" class="containerForm" id="formdata">
-                        <div class="container">
-                            <label for="datetimeWarning">fecha de aviso</label>
-                            <input type="datetime" name="datetimeWarning" id="datetimeWarning" placeholder="DD-MM-AAAA" required>
-                            <label for="datetimeExecute">fecha de ejecucion</label>
-                            <input type="datetime" name="datetimeExecute" id="datetimeExecute" placeholder="DD-MM-AAAA" required>
-                            <label for="">Reportada por:</label>
-                            <select name="reports" id="reports" required></select>
-                            <label for="">Descripcion</label>
-                            <select name="description" id="description" required></select>
-                        </div>
-                        <div class="container">
-                            <label for="workroutine">Rutina de trabajo</label>
-                            <select name="workroutine" id="workroutine" required></select>
-                            <label for="assigned">Asignada a:</label>
-                            <select name="assigned" id="assigned" required></select>
-                        </div>
-                        <div class="container">
-                            <label for="">Averia reportada</label>
-                            <input type="text" name="titleText" id="titleText" required>
-                        </div>
-                        <div class="container">
-                            <label for="">Trabajo a realizar:</label>
-                            <input type="text" name="report" id="report" required>
-                        </div>
-                        <div class="container">
-                            <label for="">Comentarios</label>
-                            <input type="text" name="comment" id="comment">
-                        </div>
-                        <div class="container">
-                        <input type="submit" value="Reportar" id="submit">
-                        </div>
-                    </form>
-
-                </div>
-            </div>
+    <header>
+        <div class="logo">
+            <img src="img/matfilm logo.jpg" alt="">
         </div>
+        <div class="header-title">
+            <h1>Reporte de Mantenimiento</h1>
+        </div>
+    </header>
+    <main>
+                <aside>
+                    <div class="list">
+                        <div class="title_list">
+                            <h2> Lista de Reportes</h2>
+                        </div>
+                        <div>
+                            <a href="./listReport/listReports.html">Por reportero</a>
+                            <a href="./listReport/listMachine.html">Por maquina</a>
+                            <a href="./listReport/listOrder.html">Por numero de orden</a>
+                        </div>
+                    
+                    
+                    </div>
+                </aside>
+                <section>
+                    <div class="containerAForm">
+                        <form action="" class="containerForm" id="formdata">
+                            <div class="container">
+                                <label for="datetimeWarning">fecha de aviso</label>
+                                <input type="datetime" name="datetimeWarning" id="datetimeWarning" placeholder="DD-MM-AAAA" required>
+                                <label for="datetimeExecute">fecha de ejecucion</label>
+                                <input type="datetime" name="datetimeExecute" id="datetimeExecute" placeholder="DD-MM-AAAA" required>
+                                <label for="">Reportada por:</label>
+                                <select name="reports" id="reports" required></select>
+                                <label for="">Descripcion</label>
+                                <select name="description" id="description" required></select>
+                            </div>
+                            <div class="container">
+                                <label for="workroutine">Rutina de trabajo</label>
+                                <select name="workroutine" id="workroutine" required></select>
+                                <label for="assigned">Asignada a:</label>
+                                <select name="assigned" id="assigned" required></select>
+                            </div>
+                            <div class="container">
+                                <label for="">Averia reportada</label>
+                                <input type="text" name="titleText" id="titleText" required>
+                            </div>
+                            <div class="container">
+                                <label for="">Trabajo a realizar:</label>
+                                <input type="text" name="report" id="report" required>
+                            </div>
+                            <div class="container">
+                                <label for="">Comentarios</label>
+                                <input type="text" name="comment" id="comment">
+                            </div>
+                            <div class="container">
+                                <input type="submit" value="Reportar" id="submit">
+                            </div>
+                        </form>
+                    
+                    </div>
+                </section>
     </main>
     <script src="./script.js"></script>
 </body>
