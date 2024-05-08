@@ -250,3 +250,28 @@ tr:nth-child(even) {
         width: 100%;
     }
 }
+
+#reportPrint {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+}
+
+#reportPrint p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+@media print {
+    #reportPrint {
+        padding: 10px;
+        border: none;
+    }
+
+    #reportPrint button {
+        display: none;
+        /* Ocultar el botón de impresión al imprimir */
+    }
+}

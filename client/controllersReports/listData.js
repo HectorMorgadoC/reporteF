@@ -4,6 +4,7 @@
 export function buttonGet(buttonValue,result){
     
     buttonValue.addEventListener ('click', () => {
+        const header = document.querySelector('header');
         const data = result;
         const table = document.querySelector('table');
         const list = document.querySelector('#list');
@@ -18,6 +19,7 @@ export function buttonGet(buttonValue,result){
         const reporteFalla = document.createElement('p');
         const trabajoEfectuar = document.createElement('p');
         const comentarios = document.createElement('p');
+        const containerButton = document.createElement('div');
         const button = document.createElement('button');
         button.innerText = 'Imprimir';
         reportContainer.id = 'reportPrint';
@@ -31,6 +33,7 @@ export function buttonGet(buttonValue,result){
         reporteFalla.innerText = `Reporte_falla: ${data.reporteFalla}`;
         trabajoEfectuar.innerText = `Trabajo_efectuar: ${data.trabajoEfectuar}`;
         comentarios.innerHTML = `Comentarios: ${data.comentarios}`;
+        containerButton.appendChild(button);
         reportContainer.appendChild(numeroOrden);
         reportContainer.appendChild(fechaAviso);
         reportContainer.appendChild(fechaEjecucion);
@@ -41,9 +44,10 @@ export function buttonGet(buttonValue,result){
         reportContainer.appendChild(reporteFalla);
         reportContainer.appendChild(trabajoEfectuar);
         reportContainer.appendChild(comentarios);
-        reportContainer.appendChild(button);
-        
         list.appendChild(reportContainer);
+        list.appendChild(containerButton);
+        
+        
 
         button.addEventListener('click',() => {
             html2canvas(reportContainer).then( (canvas)  => {
