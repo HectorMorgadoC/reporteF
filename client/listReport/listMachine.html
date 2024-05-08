@@ -4,20 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de reportes por maquina</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <main>
-        <div>
-            <form action="">
-                <label for="machine">Ingrese nombre de la maquina</label>
-                <select id="machine" name="machine" required></select>
-                <button>Ingreso</button>
-            </form>
+    <header>
+        <div class="logo">
+            <img src="../img/matfilm logo.jpg" alt="">
         </div>
-        <div id="list"></div>
+        <div class="header-title">
+            <h1>Reporte de Mantenimiento</h1>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div>
+                <form action="">
+                    <label for="machine">Ingrese nombre de la maquina</label>
+                    <select id="machine" name="machine" required></select>
+                    <button>Ingreso</button>
+                </form>
+            </div>
+        </section>
+        <section>
+            <div id="list"></div>
+        </section>
     </main>
     <script type="module" src="../controllersReports/listMachine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 
 </html>

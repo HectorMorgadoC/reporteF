@@ -251,27 +251,64 @@ tr:nth-child(even) {
     }
 }
 
-#reportPrint {
-    background-color: #fff;
-    padding: 20px;
-    margin: 20px auto;
-    border: 1px solid #ccc;
+#titleReport{
+    display: inline-flex;
+    justify-content: center;
+    margin : 10px 100px;
+    padding: 1em;
+    font-size: 20px;
+    border-bottom: 2px solid rgba(26, 22, 22, 0.39);
+
 }
 
-#reportPrint p {
-    margin-bottom: 10px;
-    font-size: 16px;
-    padding: 10px;
+.reportPrint{
+    display: inline-flex;
+    flex-direction: column;
 }
 
-@media print {
-    #reportPrint {
-        padding: 10px;
-        border: none;
-    }
+.containerReportDate{
+    display: inline-flex;
+    padding: .3em;
+    border: 1px solid black;
+    margin: 0;
+    margin-bottom: 1.5em;
+}
 
-    #reportPrint button {
-        display: none;
-        /* Ocultar el botón de impresión al imprimir */
-    }
+.containerReportDate p{
+    margin: 0 1.5em;
+}
+
+
+.containerReportPersons{
+    display: inline-flex;
+    flex-direction: column;
+    padding: 1em ;
+    border: 1px solid black;
+    margin-bottom: 2em;
+}
+
+.containerReportMachine{
+    display: inline-flex;
+    padding: .5em;
+    border: 1px solid black;
+    margin-bottom: 1.5em;
+}
+
+.containerReportMachine p{
+    margin: 0 1.5em;
+}
+
+.printReport {
+    display: inline-flex;
+    flex-direction: column;
+    padding: .2em;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.timbre {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+
 }
