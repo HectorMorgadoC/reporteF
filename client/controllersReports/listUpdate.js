@@ -1,6 +1,5 @@
 export function updateReport(button,data){
     button.addEventListener('click',() => {
-        console.log(data);
         let { 
             numeroOrden,
             reportero,

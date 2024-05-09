@@ -22,6 +22,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) {
             const data = await response.json(); // Parsea la respuesta como JSON
             const totalData = JSON.parse(data);
+            if(totalData.error){
+                const main = document.querySelector('main');
+                const body = document.querySelector('body');
+                const messageError = document.createElement('h3');
+                if(main){
+                    main.remove()
+                    messageError.innerHTML = 'Error de conexion';
+                    body.appendChild(messageError);
+                }
+            }
             const [ reporters,description,workRoutine,assigned ]= totalData;
             
             for( let i = 0;i < reporters.length;i++){

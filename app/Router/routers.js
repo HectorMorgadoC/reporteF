@@ -23,4 +23,4 @@ export const router = Router();
 
     router.post('/delete/:number',MyController.deleteReport);
 
-router.get('/reports/:name', MyController.getReportsList)
+    router.get('/reports/:name', MyController.getReportsList)

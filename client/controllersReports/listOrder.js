@@ -15,6 +15,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) {
             const data = await response.json(); // Parsea la respuesta como JSON
             const totalData = JSON.parse(data);
+            if(totalData.error){
+                const main = document.querySelector('main');
+                const body = document.querySelector('body');
+                const messageError = document.createElement('h3');
+                if(main){
+                    main.remove()
+                    messageError.innerHTML = 'Error de conexion';
+                    body.appendChild(messageError);
+                }
+            }
             
             for( let order of totalData ){
                 const optionReports = document.createElement('option');
@@ -52,6 +62,7 @@ document.addEventListener('submit', async (e) => {
 
     const table = document.createElement('table');
     const titleTable = document.createElement('tr');
+    titleTable.classList = 'title-table';
     
     const titleDescription = document.createElement('td');
     titleDescription.innerText = ' Descripcion_maquina';
@@ -91,14 +102,19 @@ document.addEventListener('submit', async (e) => {
             const fechaAviso = document.createElement('td');
             const fechaEjecucion = document.createElement('td');
             const reporteFalla = document.createElement('td');
+            const buttonTable = document.createElement('td');
             const buttonReport = document.createElement('button');
             const buttonUpdate = document.createElement('button');
             const buttonDelete = document.createElement('button');
+            buttonTable.classList.add('table-button');
             buttonReport.innerText = 'Imprimir';
             buttonUpdate.innerText = 'Modificar';
             buttonDelete.innerText = 'eliminar';
+            buttonTable.appendChild(buttonReport);
+            buttonTable.appendChild(buttonUpdate);
+            buttonTable.appendChild(buttonDelete);
             
-            descripcion_maquina.innerText = result.descripcionMaquina;
+            descripcion_maquina.innerText = result.descripcion;
             reportero.innerText = result.reportero;
             asignado.innerText =   result.asignado;
             fechaAviso.innerText = result.fechaAviso;
@@ -111,9 +127,7 @@ document.addEventListener('submit', async (e) => {
             listResult.appendChild(fechaAviso);
             listResult.appendChild(fechaEjecucion);
             listResult.appendChild(reporteFalla);
-            listResult.appendChild(buttonReport);
-            listResult.appendChild(buttonUpdate);
-            listResult.appendChild(buttonDelete);
+            listResult.appendChild(buttonTable);
             table.appendChild(listResult);
             list.appendChild(table);
             

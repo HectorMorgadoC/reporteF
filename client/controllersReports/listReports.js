@@ -6,8 +6,6 @@ const select = document.getElementById('reports');
 const list = document.getElementById('list');
 const button = document.getElementById('buttonInp');
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await fetch('http://localhost:5000/reports', {
@@ -18,6 +16,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = await response.json(); // Parsea la respuesta como JSON
             const totalData = JSON.parse(data);
             
+            if(totalData.error){
+                const main = document.querySelector('main');
+                const body = document.querySelector('body');
+                const messageError = document.createElement('h3');
+                if(main){
+                    main.remove()
+                    messageError.innerHTML = 'Error de conexion';
+                    body.appendChild(messageError);
+                }
+            }
             for( let reports of totalData ){
                 const optionReports = document.createElement('option');
                 optionReports.innerHTML = reports.nombre;
